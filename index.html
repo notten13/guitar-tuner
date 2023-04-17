@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Guitar Tuner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    body {
+      width: 100%;
+      max-width: 400px;
+      margin: 50px auto;
+      text-align: center;
+      background: #3C2A21;
+      color: #E5E5CB;
+      font-family: sans-serif;
+    }
+
+    .tuning-buttons {
+      display: grid;
+      width: 100%;
+      max-width: 200px;
+      margin: auto;
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: repeat(3, auto);
+    }
+
+    button {
+      display: block;
+      margin: 30px auto;
+      background: none;
+      font-size: 1.3em;
+      border: solid 1px #E5E5CB;
+      color: #E5E5CB;
+      padding: 20px 25px;
+      border-radius: 200px;
+      cursor: pointer;
+    }
+
+    button.active {
+      background-color: #1A120B;
+      border-color: #1A120B;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>GUITAR TUNER</h1>
+
+  <main x-data="notes()">
+    <div class="tuning-buttons">
+      <template x-for="presetNote in currentPreset" :key="presetNote.note">
+        <button @click="playNote(presetNote.note)" :class="currentNote === presetNote.note ? 'active' : ''"
+          x-text="presetNote.label"></button>
+      </template>
+    </div>
+
+    <template x-if="currentNote">
+      <button @click="stop()">Stop</button>
+    </template>
+  </main>
+
+  <script src="index.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+
+</html>
